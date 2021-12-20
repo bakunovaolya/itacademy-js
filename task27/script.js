@@ -1,6 +1,7 @@
 var formDef1=[
     {label:'Название сайта:', kind:'longtext', name:'sitename', vrules : ['not-empty','min-len:5']},
     {label:'URL сайта:', kind: 'longtext', name: 'siteURL', vrules : ['not-empty']},
+    {label:'Дата запуска сайта:', kind: 'date', name: 'siteDate', vrules : ['not-empty']},
     {label:'Посетителей в сутки:', kind: 'number', name: 'visitors', vrules : ['not-empty']},
     {label:'E-mail для связи:', kind: 'shorttext', name: 'email', vrules : ['email']},
     {label:'Рубрика каталога:', kind: 'combo', name: 'division', vrules : ['not-empty'],
@@ -129,6 +130,10 @@ document.addEventListener("DOMContentLoaded", function(){
                 }
                 case 'number':{
                     html.push(`${val.label}<input onchange="return validate(this, '${val.vrules ? val.vrules.join(',') : null}')" size='5' type='number' name=${val.name}></input> ${createErrorBlock(val.name)}`);
+                    break
+                }
+                case 'date':{
+                    html.push(`${val.label}<input onchange="return validate(this, '${val.vrules ? val.vrules.join(',') : null}')" size='5' type='date' name=${val.name}></input> ${createErrorBlock(val.name)}`);
                     break
                 }
                 case 'shorttext':{
