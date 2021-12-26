@@ -8,7 +8,13 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  height: 100vh;
+  min-height: 98vh;
+  margin: 0px 1px 0px 0px;
+  padding: 0px;
+}
+
+app {
+  min-height: 98vh;  
 }
 
 a {
@@ -32,7 +38,7 @@ h2 {
 
 /* STRUCTURE */
 
-#app {
+.login {
   display: flex;
   align-items: center;
   flex-direction: column; 
@@ -281,3 +287,37 @@ input[type=text]:placeholder, input[type=password]::placeholder {
 * {
   box-sizing: border-box;
 }
+
+/* Panel */
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  height: 15%;
+  background-color: white;
+}
+.right-class{
+  display: flex;
+  margin: 20px;
+}
+.left-class{
+  display: flex;
+  margin: 20px;
+}
+.icon-class {
+  height: 20px;
+}
+.man{
+  padding: 5px;
+}
+.exit{
+  padding: 5px;
+}
+.setting{
+  padding: 5px;
+}
+
+
+/* CALENDAR */
+
+

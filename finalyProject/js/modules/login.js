@@ -1,7 +1,11 @@
-document.addEventListener("DOMContentLoaded", function () {
+import { renderTag } from "./../libs/render.js"
+import { jwtCreate } from "./../libs/jwt.js"
 
-	const APP = document.getElementById('app');
+export const loginPage = (APP, renderPage) => {
 
+	APP.innerHTML = ""; // clear
+
+	const login = renderTag('div', { class : "login" })
 	const wrapper = renderTag('div', { class : "wrapper fadeInDown" })
 	const formContent = renderTag('div', { id : "formContent" });
 
@@ -29,7 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	const signUpFormBlock = renderTag('div', {id : "signup-form", class : "hide"});
 	const signUpForm = renderTag('form', {id: "idUPForm"});
 		signUpForm.append( 
-			renderTag('input', {type : "text", id : "signup-login", class : "fadeIn", name : "signup-login", placeholder : "Логин"}), 
+			renderTag('input', {type : "text", id : "signup-name", class : "fadeIn", name : "signup-name", placeholder : "Имя"}), 
+			renderTag('input', {type : "text", id : "signup-login", class : "fadeIn", name : "signup-login", placeholder : "Email"}), 
 			renderTag('input', {type : "password", id : "signup-password", class: "fadeIn", name : "signup-password", placeholder : "Пароль"}), 
 			renderTag('input', {type : "password", id : "signup-password2", class: "fadeIn", name : "signup-password2", placeholder : "Повторите пароль"}), 
 			renderTag('input', {type : "submit", class : "fadeIn first", value : "Зарегистрироваться"}) 
@@ -44,20 +49,22 @@ document.addEventListener("DOMContentLoaded", function () {
 	formContent.append(footerBlock);
 
 	wrapper.append(formContent);
-	APP.append(wrapper);	
+	login.append(wrapper);
+	
+	APP.append(login)
 
 	/// listeners
-	addActionForForm();
+	addActionForForm(renderPage);
 
-});
+};
 
 
-function addActionForForm() {
+function addActionForForm(renderPage) {
 
-	const signIn = document.getElementById('login-form');
-	const signUp = document.getElementById('signup-form');
-	const tabSignUp = document.getElementById('sign-up');
-	const tabSignIn = document.getElementById('sign-in');
+	const signIn = document.querySelector('#login-form');
+	const signUp = document.querySelector('#signup-form');
+	const tabSignUp = document.querySelector('#sign-up');
+	const tabSignIn = document.querySelector('#sign-in');
 
 	tabSignUp.onclick = () => {
 		signIn.classList.remove('display');
@@ -87,18 +94,19 @@ function addActionForForm() {
 
 	}
 // обработка формы регистрации
-	const upForm = document.getElementById("idUPForm");
+	const upForm = document.querySelector("#idUPForm");
     upForm.addEventListener('submit', function(e){
 		e.preventDefault();
 		const loginUp = upForm.elements["signup-login"].value;
+		const nameUp = upForm.elements["signup-name"].value;
 		const passwordUp = upForm.elements["signup-password"].value;
 		const passwordUp2 = upForm.elements["signup-password2"].value;
 		if (passwordUp != passwordUp2) {
 			alert('Пароли не совпадают')
 			}
-		if (localStorage.getItem(loginUp) === null) {
+		else if (localStorage.getItem(loginUp) === null) {
 			//json = JSON.stringify({login: loginUp, password: passwordUp, password2: passwordUp2});
-			localStorage.setItem(loginUp, JSON.stringify({login: loginUp, password: CryptoJS.SHA512(passwordUp).toString(CryptoJS.enc.Base64)}));
+			localStorage.setItem(loginUp, JSON.stringify({login: loginUp, name : nameUp, password: CryptoJS.SHA512(passwordUp).toString(CryptoJS.enc.Base64)}));
 			alert ('Регистрация прошла успешно');
 		}
 		else {
@@ -106,7 +114,7 @@ function addActionForForm() {
 		} 
 	});
 // обработка формы входа
-const inForm = document.getElementById("idINForm");
+const inForm = document.querySelector("#idINForm");
     inForm.addEventListener('submit', function(e){
 		e.preventDefault();
 		const loginIn = inForm.elements["signin-login"].value;
@@ -121,7 +129,8 @@ const inForm = document.getElementById("idINForm");
 		}else {
 		const user = JSON.parse(localStorage.getItem(loginIn));
 		if (loginIn in localStorage && CryptoJS.SHA512(passwordIn).toString(CryptoJS.enc.Base64) === user.password) {
-			alert('Вход выполнен успешно');
+			localStorage.setItem('token', jwtCreate({user : loginIn}))
+			renderPage();
 		}
 		else {
 			alert('такого пользователя нет или пароль введен неверно');
