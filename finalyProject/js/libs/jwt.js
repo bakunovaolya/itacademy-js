@@ -17,7 +17,7 @@ export const jwtCreate = (params = {}) => {
 
     const secret = "SECRET!!!";
 
-    const encodedHeader = base64url(CryptoJS.enc.Utf8.parse(JSON.stringify(header)));
+    const encodedHeader = base64url(CryptoJS.enc.Utf8.parse(JSON.stringify(header)));// объект преобразуется в base64
     const encodedData = base64url(CryptoJS.enc.Utf8.parse(JSON.stringify(params)));
     const signature = base64url(CryptoJS.HmacSHA256(`${encodedHeader}.${encodedData}`, secret));
 

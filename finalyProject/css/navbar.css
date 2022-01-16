@@ -1,0 +1,32 @@
+.menu {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom: 0;
+	background-color: #f8f8f8;
+	border: 1px solid #e7e7e7;
+  }
+  
+  .right-class {
+	padding-top: 7px;
+  }
+  
+  .left-class{
+	padding: 10px;
+  }
+  .icon-class {
+	height: 20px;
+  }
+  .man{
+	display: inline-block;
+	padding: 10px;
+  }
+  .exit{
+	cursor: pointer;
+	padding: 10px;
+	margin-right: 20px;
+  }
+  .setting{
+	cursor: pointer;
+	padding: 10px;
+  }

@@ -1,6 +1,3 @@
-#modal{
-}
-
 .modal-shown {
   display: block;
 }
@@ -12,7 +9,7 @@
 .modal {
     position: fixed; 
     z-index: 1; 
-    padding-top: 100px;
+    padding-top: 6vh;
     left: 0;
     top: 0;
     width: 100%; 
@@ -20,6 +17,7 @@
     overflow: auto; 
     background-color: rgb(222,0,0);
     background-color: rgba(2,0,0,0.5); 
+    
 }
 
   /* Modal Content */
@@ -27,11 +25,21 @@
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
+    padding-top: 40px;
     border: 1px solid #888;
     width: 80%;
     max-width: 960px;
     position:relative;
-    animation:animetop 0.4s
+    animation:animetop 0.4s;
+    border-radius: 15px;
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+
+#modal-content-block {
+  overscroll-behavior: contain;
+  max-height: 70vh;
+  overflow: auto;
+  margin-top: 15px;
 }
 
 @keyframes animetop{
@@ -40,12 +48,47 @@
   }
 }
 
+
 .modal-close {
-  
+  position: absolute;
   cursor: pointer;
-  right:0;
+  right: 25px;
+  top: 25px;
+  width: 25px;
+  height: 25px;
+  opacity: 0.3;
+}
+.modal-close:hover {
+  opacity: 1;
+}
+.modal-close:before, .modal-close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 25px;
+  width: 2px;
+  background-color: #333;
+}
+.modal-close:before {
+  transform: rotate(45deg);
+}
+.modal-close:after {
+  transform: rotate(-45deg);
 }
 
-.modal-close:hover {
-  box-shadow: 0 0 5px rgba(0,0,0,0.4);
+.modal-buttons-area {
+  width: 100%;
+  text-align: center;
+}
+
+.modal-delete-event-btn[type=button] {
+  cursor: pointer;
+  margin: 5px;
+  position: absolute;
+  right:40px;
+  top:-40px;
+  outline:5px;
+  padding: 5px 10px;
+  font-size: 150%;
+  transform-origin: 0 0;
 }

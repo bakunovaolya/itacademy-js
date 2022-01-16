@@ -1,55 +1,53 @@
 import { renderTag } from "./render.js";
 
 export class Modal {
+  constructor(options) {
+    this.isOpen = false;
+    this.containerTag = (options && options.containerTag) || "#modal";
+    this.containerContentTag = (options && options.containerContentTag) || "#modal-content-block";
+    this.container = null;
+    this.modal = null;
+  }
 
-	constructor(options){
-		this.isOpen = false;
-		this.containerTag =  ( options && options.containerTag) || "#modal";
-		this.containerContentTag =  ( options && options.containerContentTag) || "#model-content-block";
-        this.container = null;
-		this.modal = null;
-	}
+  init() {
+    // модальное окно без контента
 
-	init() { // модальное окно без контента
+    this.container = document.querySelector(this.containerTag);
 
-		this.container = document.querySelector(this.containerTag);
-		
-		const modalBlock = renderTag('div', { class : "modal modal-hidden" });
-		const modalContent = renderTag('div', {class : "modal-content"})
-		const modalCloseBlock = renderTag('div', {style : "text-align:right"})
-		const modalCloseIcon = renderTag('span', {class : "modal-close", innerHTML : "X"})
-		modalCloseBlock.append(modalCloseIcon);
-		modalContent.append(modalCloseBlock)
-		modalContent.append(renderTag('div', {id : this.containerContentTag.replace("#","")}))
-		modalBlock.append(modalContent);
-		
-		this.container.innerHTML = "";
-		this.container.append(modalBlock);
+    const modalBlock = renderTag("div", { class: "modal modal-hidden" });
+    const modalContent = renderTag("div", { class: "modal-content" });
+    const modalCloseBlock = renderTag("div", { style: "text-align:right" });
+    const modalCloseIcon = renderTag("span", { class: "modal-close" });
+    modalCloseBlock.append(modalCloseIcon);
+    modalContent.append(modalCloseBlock);
+    modalContent.append(renderTag("div", { id: this.containerContentTag.replace("#", "") }));
+    modalBlock.append(modalContent);
 
-		modalCloseBlock.onclick = this.close.bind(this);
-	}
+    this.container.innerHTML = "";
+    this.container.append(modalBlock);
 
-	render(content = renderTag('div'), immediatelyShow = true) {
-		const contentBlock = document.querySelector(this.containerContentTag)
-		contentBlock.innerHTML = "";
-		contentBlock.append(content);
+    modalCloseBlock.onclick = this.close.bind(this);
+  }
 
-		if(immediatelyShow) {
-			this.open()
-		}
-	}
+  render(content = renderTag("div"), immediatelyShow = true) { //перерисовываем модальное окно и тут же открываем
+    const contentBlock = document.querySelector(this.containerContentTag);
+    contentBlock.innerHTML = "";
+    contentBlock.append(content);
 
-	close() {
-		const modalBlock = document.querySelector(`${this.containerTag} > div`);
-		modalBlock.classList.remove('modal-shown');
-		modalBlock.classList.add('modal-hidden');
-	}
+    if (immediatelyShow) {
+      this.open();
+    }
+  }
 
-	open() {
-		const modalBlock = document.querySelector(`${this.containerTag} > div`);
-		modalBlock.classList.add('modal-shown');
-		modalBlock.classList.remove('modal-hidden');
-	}
+  close() {
+    const modalBlock = document.querySelector(`${this.containerTag} > div`);
+    modalBlock.classList.remove("modal-shown");
+    modalBlock.classList.add("modal-hidden");
+  }
 
-
+  open() {
+    const modalBlock = document.querySelector(`${this.containerTag} > div`);
+    modalBlock.classList.add("modal-shown");
+    modalBlock.classList.remove("modal-hidden");
+  }
 }

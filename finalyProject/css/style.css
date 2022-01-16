@@ -1,24 +1,27 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 /* BASIC */
+*:focus {
+  outline: none;
+} 
 
-html {
-  background-color: #56baed;
+* {
+box-sizing: border-box;
 }
 
 body {
   font-family: "Poppins", sans-serif;
-  min-height: 98vh;
+  min-height: 90vh;
   margin: 0px 1px 0px 0px;
   padding: 0px;
 }
 
 app {
-  min-height: 98vh;  
+  min-height: 90vh;  
 }
 
 a {
-  color: #92badd;
+  color: #007b57;
   display:inline-block;
   text-decoration: none;
   font-weight: 400;
@@ -34,9 +37,30 @@ h2 {
   color: #cccccc;
 }
 
-
-
 /* STRUCTURE */
+
+.wrapper {
+  display: grid;  
+  grid-template-columns: 70% 30%; /* 2 столбца */
+  height: 100vh;
+}
+.img-wrapper{
+  display:flex;
+  background-image: url(./../img/backimg.jpg);
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.img-class{
+ /* width: 100%;*/
+  max-height: 100%;
+  object-fit: cover;
+}
+.tabs-wrapper{
+  display: flex;
+  justify-content: center;
+}
 
 .login {
   display: flex;
@@ -48,7 +72,7 @@ h2 {
   padding: 20px;	
 }
 
-.wrapper {
+.wrapper_form {
   display: flex;
   align-items: center;
   flex-direction: column; 
@@ -91,7 +115,7 @@ h2.inactive {
 
 h2.active {
   color: #0d0d0d;
-  border-bottom: 2px solid #5fbae9;
+  border-bottom: 2px solid #007b57;
 }
 
 
@@ -99,17 +123,17 @@ h2.active {
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
-  background-color: #56baed;
+  background-color: #007b57;
   border: none;
   color: white;
-  padding: 15px 80px;
+  padding: 15px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   text-transform: uppercase;
   font-size: 13px;
-  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+  -webkit-box-shadow: 0 10px 30px 0 rgba(0,123,87,0.4);
+  box-shadow: 0 10px 30px 0 rgba(0,123,87,0.4);
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
   margin: 5px 20px 40px 20px;
@@ -120,8 +144,14 @@ input[type=button], input[type=submit], input[type=reset]  {
   transition: all 0.3s ease-in-out;
 }
 
+fieldset.fieldset-event{
+  padding: 20px;
+  margin-top: 20px;
+  position:relative;
+}
+
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-  background-color: #39ace7;
+  background-color: #007b57;
 }
 
 input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -142,8 +172,9 @@ input[type=text], input[type=password]  {
   display: inline-block;
   font-size: 16px;
   margin: 5px;
+  margin-bottom: 0px;
   width: 85%;
-  border: 2px solid #f6f6f6;
+  border: 2px solid #ddd;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
   -ms-transition: all 0.5s ease-in-out;
@@ -155,15 +186,31 @@ input[type=text], input[type=password]  {
 
 input[type=text]:focus, input[type=password]:focus {
   background-color: #fff;
-  border-bottom: 2px solid #5fbae9;
+  border-bottom: 2px solid #007b57;
 }
 
 input[type=text]:placeholder, input[type=password]::placeholder {
   color: #cccccc;
 }
 
+.validation-error {
+  background-color: #fff;
+  color: #d9534f;
+  border: 1px solid #d9534f;
+  border-radius: 0px 0px 5px 5px;
+  font-size: 80%;
+  margin: 5px;
+  margin-top: 0px;
+  width: 85%;
+  display: inline-block;
+}
+
+
 .display {
 	display: inline;
+}
+.display-block {
+	display: inline-block;
 }
 .hide {
 	display: none;
@@ -259,7 +306,7 @@ input[type=text]:placeholder, input[type=password]::placeholder {
   bottom: -10px;
   width: 0;
   height: 2px;
-  background-color: #56baed;
+  background-color: #007b57;
   content: "";
   transition: width 0.2s;
 }
@@ -273,51 +320,41 @@ input[type=text]:placeholder, input[type=password]::placeholder {
 }
 
 
-
-/* OTHERS */
-
-*:focus {
-    outline: none;
-} 
-
-#icon {
-  width:10%;
+fieldset {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  box-shadow: 0px 0px 2px rgba(0,0,0,1);
+  background-color: rgb(240,240,240);
+  border-radius: 15px;
+  padding: 20px;
+  padding-bottom: 50px;
 }
 
-* {
-  box-sizing: border-box;
+fieldset > input[type=text] {
+  width: 99%;
 }
 
-/* Panel */
-
-.menu {
-  display: flex;
-  justify-content: space-between;
-  height: 15%;
-  background-color: white;
-}
-.right-class{
-  display: flex;
-  margin: 20px;
-}
-.left-class{
-  display: flex;
-  margin: 20px;
-}
-.icon-class {
-  height: 20px;
-}
-.man{
-  padding: 5px;
-}
-.exit{
-  padding: 5px;
-}
-.setting{
-  padding: 5px;
+legend {
+  background-color: #007b57;
+  padding: 0.1rem 0.75rem;
+  font-size: 1.3rem;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  transform: translateX(-1.5rem);
+  box-shadow: -1px 1px 1px rgba(0,0,0,0.8);
 }
 
-
-/* CALENDAR */
-
-
+legend:after {
+  content: "";
+  height: 0;
+  width:0;
+  background-color: transparent;
+  border-top: 0.0rem solid transparent;
+  border-right:  0.35rem solid black;
+  border-bottom: 0.45rem solid transparent;
+  border-left: 0.0rem solid transparent;
+  position:absolute;
+  left:-0.075rem;
+  bottom: -0.45rem;
+}
